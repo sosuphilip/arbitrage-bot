@@ -1,0 +1,21 @@
+{
+  "name": "arbitrage-bot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CEX-to-CEX spot arbitrage bot (scanner + executor) built on ccxt",
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "scan": "tsx src/index.ts --once",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "ccxt": "^4.4.0",
+    "dotenv": "^16.4.5",
+    "tsx": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.2"
+  }
+}
