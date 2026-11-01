@@ -55,6 +55,23 @@ The bot is light (one Node process), so it fits Botkeep's free tier (512 MB RAM,
 
 **Good practice:** the bot is non-interactive and writes diagnostics to stdout — exactly what Botkeep expects, so no changes are needed on their side.
 
+## Telegram notifications (optional, free)
+
+The bot can alert your Telegram the moment a real opportunity appears (net spread ≥ `ALERT_SPREAD_PCT`, `0.2%` by default, with a 10-minute anti-spam cooldown per symbol) and whenever a trade is executed.
+
+1. In Telegram, talk to **@BotFather** → `/newbot` → follow the prompts → copy the **bot token**.
+2. Create a `.env` (locally) or add env vars (Botkeep dashboard)
+
+```env
+TELEGRAM_BOT_TOKEN=123456:ABC-your-token-here
+```
+
+3. Find *your new bot* in Telegram and send it any message (e.g. `hello`).
+4. Run `npm run telegram-id` locally — it prints `TELEGRAM_ALERT_CHAT_ID=<number>`. Put that number in the environment too (plus `ALERT_SPREAD_PCT` / `ALERT_COOLDOWN_MS` if you want different thresholds).
+5. Restart the bot → run `npm start` (or Redeploy on Botkeep).
+
+To test end to end: send `/start` to the bot again, set an easy threshold (`ALERT_SPREAD_PCT=-1` fires on *any* gap, since alert math is net spread ≥ threshold), deploy, and you should get a message within a few scans. Remove it afterwards.
+
 ## Key parameters
 
 | Env | Meaning |

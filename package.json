@@ -7,6 +7,7 @@
   "scripts": {
     "start": "tsx src/index.ts",
     "scan": "tsx src/index.ts --once",
+    "telegram-id": "tsx src/index.ts --telegram-chat-id",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

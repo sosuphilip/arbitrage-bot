@@ -8,6 +8,10 @@ export interface Config {
   minSpreadPct: number;
   maxTradeUsd: number;
   intervalMs: number;
+  // Net spread (percent) at which a Telegram alert fires (may be lower than minSpreadPct).
+  alertSpreadPct: number;
+  // Per-symbol alert cooldown (ms) so repeated scans don't spam Telegram.
+  alertCooldownMs: number;
   // Taker fee (fraction, e.g. 0.001 = 0.1%) per exchange id, used for net spread math.
   takerFees: Record<string, number>;
   exchanges: string[];
@@ -60,6 +64,8 @@ export function loadConfig(): Config {
     minSpreadPct,
     maxTradeUsd,
     intervalMs,
+    alertSpreadPct: Number(process.env.ALERT_SPREAD_PCT ?? 0.2),
+    alertCooldownMs: Number(process.env.ALERT_COOLDOWN_MS ?? 600_000),
     takerFees: {
       binance: 0.001, // 0.1%
       bybit: 0.001, // 0.1%
